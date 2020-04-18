@@ -6,10 +6,12 @@
  */
 
 import React from "react"
+import {Helmet} from 'react-helmet'
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import Menu from './menu'
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -18,14 +20,22 @@ const Layout = ({ children }) => {
       site {
         siteMetadata {
           title
+          description
         }
       }
     }
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+    <div>
+      <Helmet>
+        title = {data.site.siteMetadata.title}
+        
+      </Helmet>
+
+      <Header siteTitle={data.site.siteMetadata.title} 
+       />
+       <Menu />
       <div
         style={{
           margin: `0 auto`,
@@ -40,7 +50,7 @@ const Layout = ({ children }) => {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
-    </>
+    </div>
   )
 }
 
